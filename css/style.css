@@ -1,0 +1,15 @@
+
+div.itemimage {
+    width: 80px;
+    height: 100px;
+    float: left;
+}
+
+div.itemtitle {
+    height: 100px;
+}
+
+div.page {
+    width: 25px;
+    float: left;
+}

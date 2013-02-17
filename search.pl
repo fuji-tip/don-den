@@ -18,7 +18,7 @@ my %selected = ( $SearchIndex => ' selected' );
 
 my $amz_response = &amazon_simple_search($SearchIndex, $Keywords, $presentpage);
 
-my $itemurl = "./item.pl";
+my $itemurl = "./amazon-detail.pl";
 my $itemtitle;
 my $itemimage;
 my $itemASIN;
@@ -36,22 +36,19 @@ Content-type: text/html
     <head>
     <meta charset='UTF-8' />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
-    <link rel='stylesheet' type='text/css' href='./css/bootstrap.min.css' />
-    <link rel='stylesheet' type='text/css' href='./css/bootstrap-responsive.min.css' />
     <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no "/>
     </head>
     <body>
-      <div class='container-fluid'>
-        <form action='amazon-html.pl' method='GET' class=''>
-          <select name='SearchIndex'>
-            <option value='Books'$selected{'Books'}>本</option>
-            <option value='DVD'$selected{'DVD'}>DVD</option>
-            <option value='Video'$selected{'Video'}>ビデオ</option>
-            <option value='VideoGames'$selected{'VideoGames'}>ゲーム</option>
-          </select>
-          <input type='text' name='Keywords' value='$Keywords' class='input-type search-query' placeholder='Search word...'>
-          <input class='btn' type='submit' value='検索'>
-          <p>$itemnum 件ヒットしました。</p>
+    <form action='amazon-html.pl' method='GET'>
+    <select name='SearchIndex'>
+    <option value='Books'$selected{'Books'}>本</option>
+    <option value='DVD'$selected{'DVD'}>DVD</option>
+    <option value='Video'$selected{'Video'}>ビデオ</option>
+    <option value='VideoGames'$selected{'VideoGames'}>ゲーム</option>
+    </select>
+    <input type='text' name='Keywords' value='$Keywords'>
+    <input type='submit' value='検索'>
+    <p>$itemnum 件ヒットしました。</p>
 !!EOF
 
 if ($totalpages > 10) {
@@ -71,13 +68,13 @@ for ($i = 1; ($i <= $totalpages) && ($i <= 10); $i++) {
     if ($i == $presentpage) {
 	print "<div class='page'>$i</div>";
     } else {
-	print "<div class='page'><a href='./amazon-html.pl?SearchIndex=$SearchIndex&Keywords=$Keywords&page=$i'>$i</a></div>";
+	print "<div class='page'><a href='./amazon-html.cgi?SearchIndex=$SearchIndex&Keywords=$Keywords&page=$i'>$i</a></div>";
     }
 }
 if ($totalpages > 10) {
     print "<div class='page'>.....</div>";
 }
 
-print "</div></form></body></html>";
+print "</form></body></html>";
 0;
 

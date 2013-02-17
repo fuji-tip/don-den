@@ -35,55 +35,32 @@ Content-type: text/html
 <html>
     <head>
     <meta charset='UTF-8'>
-    <link rel="stylesheet" type='text/css' href='./css/style.css' />
-    <link rel='stylesheet' type='text/css' href='./css/bootstrap.min.css' />
-    <link rel='stylesheet' type='text/css' href='./css/bootstrap-responsive.min.css' />
-    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no "/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type='text/javascript' src='./js/jquery.js'></script>
+    <script type='text/javascript' src='./comment.js'></script>
+    <link rel="stylesheet" type='text/css' href='./css/style.css'>
     </head>
     <body>
-    <div class='container-fluid'>
-      <div class='header'></div>
-      <div class='row-fluid' id='item_detail'>
-        <div class='span2'>
-          <a href='$itemurl'><img src='$itemimage' /></a>
-        </div>
-        <div class='span4'>$itemtitle</div>
-      </div>
-      <div class='row-fluid'>
-        <div class='result alert span6' id='result'></div>
-      </div>
-      <div class='row-fluid'>
-        <form action='' id='commentform' name='commentform'>
-          <div class='span8'>
-            <div class='span7'>
-              <textarea name='comment' rows='4'></textarea>
-            </div>
-            <div class='span1'>
-              <button type='submit' class='btn'>insert</button>
-            </div>
-          </div>
-          <input id='asin' type='hidden' value='$itemASIN'></input>
-        </form>
-      </div>
-      <div class='row-fluid'>
-        <div class='span8'>
-          <a href='#' class='btn' onClick='history.back(); return false;'>戻る</a>
-        </div>
-      </div>
-      <div class='row-fluid'>
-        <div class='span8' id='past_comment'>
+    <a href='$itemurl'>
+    <img src='$itemimage' />
+    $itemtitle
+    </a>
+    <div id='result'></div>
+    <div id='form'>
+    <form action='' id='commentform' name='commentform'>
+    <textarea name='comment'></textarea>
+    <button type='submit'>insert</button>
+    <p><a href='#' onClick='history.back(); return false;'>戻る</a></p>
+    <input id='asin' type='hidden' value='$itemASIN'></input>
+    </form>
+    </div>
 !!EOF
     while ($comment = $sth->fetchrow_array) {
 	print "\t<div class='comment'>$comment</div>\n";
 }
 print <<"!!EOF";
-          <div id="new_comment"></div>
-        </div>
-      </div>
-    </div>
-    <div class='footer'></div>
-    <script type='text/javascript' src='./js/jquery.js'></script>
-    <script type='text/javascript' src='./comment.js'></script>
+    <div id="new_comment"></div>
     </body>
 </html>
 !!EOF
+
